@@ -1,0 +1,8 @@
+<h1>List of ratings</h1>
+<p>Number of ratings: <%= @ratings.count %> </p>
+<p> <%= link_to 'New rating', new_rating_path %> </p>
+<ul>
+	<% @ratings.each do |rating| %>
+	<li> <%= rating %> <%= link_to 'delete', rating_path(rating.id), method: :delete, data: { confirm: 'poistanko??' } %> </li>
+	<% end %>
+</ul>

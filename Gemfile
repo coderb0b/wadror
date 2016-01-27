@@ -7,6 +7,7 @@ gem 'rails', '4.2.5'
 #gem 'sqlite3'
 #PostgreSQL yms.
 group :development, :test do
+  gem "better_errors"
   gem 'sqlite3'
 end
 
