@@ -11,7 +11,30 @@
     <%= link_to 'breweries', breweries_path %>
     <%= link_to 'beers', beers_path %>
     <%= link_to 'ratings', ratings_path %>
+    <%= link_to 'users', users_path %> | 
+    <% if current_user.nil? %>
+    <%= link_to 'signin', singin_path %>
+    <%= link_to 'signup', new_user_path %>
+    <% else %>
+    <% @user = User.find current_user.id %>
+    <%= link_to "#{current_user.username}", user_path(@user) %>
+    <%= link_to 'rate a beer', new_rating_path %>
+    <%= link_to 'signout', signout_path, method: :delete %>
+    <% end %>
+    
   </div>
+
+<!-- Harjoituskoodia
+  <% if session[:last_rating].nil? %>
+    <p>no ratings given</p>
+  <% else %>
+    <p>previous rating: <%= session[:last_rating] %></p>
+  <% end %>
+-->
+
+  <% if current_user %>
+    <p><%= current_user.username %> signed in</p>
+  <% end %>
 
 <%= yield %>
 

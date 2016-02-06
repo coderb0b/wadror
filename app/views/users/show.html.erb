@@ -1,0 +1,32 @@
+
+ <p id="notice"><%= notice %></p>
+
+<p>
+<!--  <strong>Username:</strong>  -->
+  <h1><strong><%= @user.username %></strong></h1>
+</p>
+
+<p>
+	Has made <%= pluralize(@user.ratings.count, 'rating') %>,
+	
+	average <%=  @user.average_rating %>
+	
+</p>
+
+<ul>
+	<% @user.ratings.each do |rating| %>
+	<li> <%= rating %> 
+		<% if @user == current_user %>
+		  <%= link_to 'delete', rating_path(rating.id), method: :delete, data: { confirm: 'are you sure??' } %>
+		  <% end %>
+	</li>
+	<% end %>
+</ul>
+
+<% if @user==current_user%>
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Destroy', user_path(@user), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', users_path %>
+<% else %>
+<%= link_to 'Back', users_path %>
+<% end %>
