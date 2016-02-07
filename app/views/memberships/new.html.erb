@@ -1,0 +1,15 @@
+<h1>New Membership</h1>
+<!--
+<%= render 'form' %>
+
+<%= link_to 'Back', memberships_path %>
+-->
+
+<%= form_for(@membership) do |f| %>
+
+
+	 <%= f.select :beerclub_beerclub_id, options_from_collection_for_select(@beerclubs, :beerclub_id, :to_s) %>
+ user: <%= f.number_field :user_id %>
+
+  <%= f.submit %>
+<% end %>
