@@ -1,6 +1,6 @@
 class Beerclub < ActiveRecord::Base
 	has_many :memberships, dependent: :destroy
-	has_many :users, -> { uniq }, through: :memberships
+	has_many :members, -> { uniq }, through: :memberships, source: :user
 
 
 	def to_s

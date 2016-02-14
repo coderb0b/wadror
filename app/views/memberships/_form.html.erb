@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+<!--  <div class="field">
     <%= f.label :user_id %><br>
     <%= f.number_field :user_id %>
   </div>
@@ -22,4 +22,16 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+
+-->
+
+
+  <div class="field">
+    <%= f.select :beerclub_id, options_from_collection_for_select(@clubs, :id, :name) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+
 <% end %>

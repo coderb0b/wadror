@@ -17,10 +17,11 @@
 
 <p>
 	<strong>Members:</strong>
-	<% @beerclub.users.each do |user| %>
+	<% @beerclub.members.each do |user| %>
 	  <%= user.username %>
 	<% end %>
 </p>
 
 <%= link_to 'Edit', edit_beerclub_path(@beerclub) %> |
 <%= link_to 'Back', beerclubs_path %>
+<p><%= link_to 'Destroy the club', @beerclub, method: :delete, data: { confirm: 'Are you sure?' } if current_user %></p>

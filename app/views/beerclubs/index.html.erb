@@ -15,12 +15,12 @@
   <tbody>
     <% @beerclubs.each do |beerclub| %>
       <tr>
-        <td><%= beerclub.name %></td>
+        <td><%= link_to beerclub.name, beerclub %></td>
         <td><%= beerclub.founded %></td>
         <td><%= beerclub.city %></td>
-        <td><%= link_to 'Show', beerclub %></td>
-        <td><%= link_to 'Edit', edit_beerclub_path(beerclub) %></td>
-        <td><%= link_to 'Destroy', beerclub, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <!--  <td><%= link_to 'Show', beerclub %></td> -->
+      <!--  <td><%= link_to 'Edit', edit_beerclub_path(beerclub) %></td> -->
+      <!--  <td><%= link_to 'Destroy', beerclub, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Beerclub', new_beerclub_path %>
+<%= link_to 'New Beerclub', new_beerclub_path if current_user %>

@@ -9,12 +9,21 @@ gem 'rails', '4.2.5'
 group :development, :test do
   gem "better_errors"
   gem 'sqlite3'
+  gem 'rspec-rails', '~> 3.0'
 end
 
 group :production do
    gem 'pg'
    gem 'rails_12factor'
 end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'simplecov', require: false
+end
+
 
 ruby '2.3.0'
 
