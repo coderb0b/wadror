@@ -39,4 +39,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  #käytetään rammia tiedostojärjestelmän sijaan
+  config.cache_store = :memory_store
 end

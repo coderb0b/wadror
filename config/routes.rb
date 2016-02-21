@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users
   resources :beers
   resources :breweries
+  resources :places, only: [:index, :show]
   
 
   root 'breweries#index'
@@ -11,6 +12,9 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   get 'singin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
+
+  #Beer Mapping API
+  post 'places', to: 'places#search'
 
 ## Aluperäiset ratings määrittelyt
 #  get 'ratings', to: 'ratings#index'

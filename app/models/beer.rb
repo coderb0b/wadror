@@ -2,6 +2,7 @@ class Beer < ActiveRecord::Base
 include RatingAverage
 
 	belongs_to :brewery
+  belongs_to :style
 	has_many :ratings, dependent: :destroy
 	has_many :raters, -> { uniq }, through: :ratings, source: :user
 
@@ -15,7 +16,7 @@ include RatingAverage
 =end
 
   def to_s
-  	"#{name} #{brewery.name}"
+  	"#{name} #{brewery.name} #{style.name}"
   end
 
 end
