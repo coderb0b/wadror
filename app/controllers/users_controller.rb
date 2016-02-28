@@ -62,6 +62,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def toggle_account
+    user = User.find(params[:id])
+    user.update_attribute :lukittu, (not user.lukittu)
+
+    new_status = user.lukittu? ? "account frozen" : "active"
+
+    redirect_to :back, notice:"user status changed to #{new_status}"
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

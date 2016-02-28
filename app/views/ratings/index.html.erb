@@ -1,8 +1,43 @@
 <h1>List of ratings</h1>
 <p>Number of ratings: <%= @ratings.count %> </p>
-<p> <%= link_to 'New rating', new_rating_path %> </p>
+<p> <%= link_to 'New rating', new_rating_path, class:'btn btn-primary' %> </p>
 <ul>
 	<% @ratings.each do |rating| %>
 	<li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
 	<% end %>
+</ul>
+
+<p>Last five ratings:</p>
+<ul>
+	<% @recent_ratings.each do |rating| %>
+	<li> <%= rating %>
+		<% end %>
+</ul>
+
+<p>Top three breweries:</p>
+<ul>
+	<% @top_breweries.each do |brewery| %>
+	<li> <%= brewery.name %> <%= brewery.average_rating %>
+		<% end %>
+</ul>
+
+<p>Top three beers:</p>
+<ul>
+	<% @top_beers.each do |beer| %>
+	<li> <%= beer.name %> <%= beer.average_rating %>
+		<% end %>
+</ul>
+
+<p>Top three raters:</p>
+<ul>
+	<% @top_raters.each do |user| %>
+	<li> <%= user.first.username %>
+		<% end %>
+</ul>
+
+<p>Top three styles:</p>
+<ul>
+	<% @top_styles.each do |style| %>
+	<li> <%= style.name %> <%= style.average_rating %>
+		<% end %>
 </ul>

@@ -6,11 +6,18 @@ class SessionsController < ApplicationController
   def create
   	# haetaan usernamea vastaava käyttäjä kannasta
   	user = User.find_by username: params[:username]
+
+
+
     if user.nil?
       redirect_to :back, notice: "User #{params[:username]} does not exist!"
     else
+
+      if user.lukittu
+      redirect_to :back, notice: "Your account is frozen :)"
+    
       
-      if user && user.authenticate(params[:password])
+      elsif user && user.authenticate(params[:password])
         session[:user_id] = user.id
         redirect_to user_path(user), notice: "Welcome back!"
         else

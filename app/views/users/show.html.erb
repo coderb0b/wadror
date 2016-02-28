@@ -1,15 +1,14 @@
-
- <p id="notice"><%= notice %></p>
-
 <p>
 <!--  <strong>Username:</strong>  -->
-  <h1><strong><%= @user.username %></strong></h1>
+  <h1><strong><%= @user.username %></strong> <% if @user.lukittu %><a class="bg-info">account frozen</a><% end %></h1>
+  
+
 </p>
 
 <p>
 	Has made <%= pluralize(@user.ratings.count, 'rating') %>,
 	
-	average <%=  @user.average_rating %>
+	average <%=  round(@user.average_rating) %>
 	
 </p>
 
@@ -32,6 +31,11 @@
 
 </ul>
 
+<% if not @user.lukittu %>
+<%= link_to "froze account", toggle_account_user_path(@user.id), method: :post, class: "btn btn-primary" %>
+<% else %>
+<%= link_to "reactivate account", toggle_account_user_path(@user.id), method: :post, class: "btn btn-warning" %>
+<% end %>
 
 <% if @user==current_user%>
 <%= link_to 'Edit', edit_user_path(@user) %> |

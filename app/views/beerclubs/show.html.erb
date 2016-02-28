@@ -40,7 +40,10 @@
 </p>
 <% end %>
 
-
+<!--
 <%= link_to 'Edit', edit_beerclub_path(@beerclub) %> |
 <%= link_to 'Back', beerclubs_path %>
-<p><%= link_to 'Destroy the club', @beerclub, method: :delete, data: { confirm: 'Are you sure?' } if current_user %></p>
+<p><%= link_to 'Destroy the club', @beerclub, method: :delete, class:'btn btn-danger', data: { confirm: 'Are you sure?' } if current_user %></p> 
+-->
+
+<%= edit_and_destroy_buttons(@beerclub) %>

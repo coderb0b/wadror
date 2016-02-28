@@ -15,10 +15,14 @@ class PlacesController < ApplicationController
 	end
 
 	def show
-		city = session[:last_city] #viimeksi haettu kaupunki
+=begin	city = session[:last_city] #viimeksi haettu kaupunki
 		id = params[:id] #haluttu place id
 		placet_cachesta = Rails.cache.read("#{session[:last_city]}")
 		#miten yksittäiseen placeen pääsee käsiksi?
+=end
+
+        @place = BeermappingApi.place_in(params[:id], session[:last_city])
+
 	end
 
 end

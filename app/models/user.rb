@@ -4,7 +4,7 @@ include RatingAverage
                          length: { minimum: 3 }
     validates :username, length: { maximum: 15 }
     validates :password, length: { minimum: 4 } 
-    validates :password, format: { with:/(?=.*[A-Z])/ }
+    validates :password, format: { with:/(?=.*[A-Z])/ }    
 
 	has_many :ratings, dependent: :destroy
 	has_many :beers, through: :ratings
@@ -13,6 +13,29 @@ include RatingAverage
 	has_many :beerclubs, through: :memberships
 
 	has_secure_password
+
+
+
+  def self.top(n)     
+   
+
+   #i=0
+   #num=n
+   #top_raters=[]
+
+   #while i<num do
+    top_raters = User.all.group_by{|u| u.ratings.count}.sort.reverse.map{|x,y| y}.take(3)
+    #i+=1     
+    
+   #end
+   #return top_raters
+   #User.all.group_by{|u| u.ratings.count}.sort.reverse
+   #User.all.group_by{|u| u.ratings.count}.sort.reverse.map{|x,y| y}
+   #User.all.map { |u| u.ratings.count }
+   #User.includes(:ratings).group_by{|u| u.ratings.count}
+
+
+  end
 
 	def favorite_beer
 		return nil if ratings.empty?

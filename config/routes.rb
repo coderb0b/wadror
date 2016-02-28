@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   resources :memberships
   resources :beerclubs
-  resources :users
+  resources :users do
+    post 'toggle_account', on: :member
+  end
   resources :beers
-  resources :breweries
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end  
   resources :places, only: [:index, :show]
   
 
@@ -16,6 +20,8 @@ Rails.application.routes.draw do
   #Beer Mapping API
   post 'places', to: 'places#search'
 
+
+
 ## Aluperäiset ratings määrittelyt
 #  get 'ratings', to: 'ratings#index'
 #  get 'ratings/new', to: 'ratings#new'
@@ -23,6 +29,8 @@ Rails.application.routes.draw do
 
   resources :ratings, only: [:index, :new, :create, :destroy]
   resource :session, only: [:new, :create, :destroy]
+
+  resources :styles
 
   
   # The priority is based upon order of creation: first created -> highest priority.
