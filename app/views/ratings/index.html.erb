@@ -17,14 +17,14 @@
 <p>Top three breweries:</p>
 <ul>
 	<% @top_breweries.each do |brewery| %>
-	<li> <%= brewery.name %> <%= brewery.average_rating %>
+	<li> <%= brewery.name %> <%= round(brewery.average_rating) %>
 		<% end %>
 </ul>
 
 <p>Top three beers:</p>
 <ul>
 	<% @top_beers.each do |beer| %>
-	<li> <%= beer.name %> <%= beer.average_rating %>
+	<li> <%= beer.name %> <%= round(beer.average_rating) %>
 		<% end %>
 </ul>
 
@@ -38,6 +38,6 @@
 <p>Top three styles:</p>
 <ul>
 	<% @top_styles.each do |style| %>
-	<li> <%= style.name %> <%= style.average_rating %>
+	<li> <%= style.name %> <%= round(style.average_rating) %>
 		<% end %>
 </ul>

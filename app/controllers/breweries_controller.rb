@@ -12,9 +12,39 @@ class BreweriesController < ApplicationController
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
     
+    order = params[:order] || 'name'
+    last_order = session[:last_order]
+
+    if order=='name' && last_order=='name'
+
+      @active_breweries = @active_breweries.sort_by{ |b| b.name }.reverse
+      @retired_breweries = @retired_breweries.sort_by{ |b| b.name }.reverse
+      session[:last_order] = ''
+    
+    elsif order=='year' && last_order=='year'
+      @active_breweries = @active_breweries.sort_by{ |b| b.year }.reverse
+      @retired_breweries = @retired_breweries.sort_by{ |b| b.year }.reverse
+      session[:last_order] = ''        
+    else
+      
+      @active_breweries = case order      
+        when 'name' then @active_breweries.sort_by{ |b| b.name }        
+        when 'year' then @active_breweries.sort_by{ |b| b.year }        
+      end
+      
+      @retired_breweries = case order
+        when 'name' then @retired_breweries.sort_by{ |b| b.name }
+        when 'year' then @retired_breweries.sort_by{ |b| b.year } 
+      end
+      
+    session[:last_order] = order
+
+    end
+  end
+        
 
     #render :panimot
-  end
+  
 
   # GET /breweries/1
   # GET /breweries/1.json
@@ -89,6 +119,8 @@ class BreweriesController < ApplicationController
     def brewery_params
       params.require(:brewery).permit(:name, :year, :active)
     end
+
+end
 =begin
     def authenticate
       admin_accounts = { "admin" => "secret", "pekka" => "beer", "arto" => "foobar", "matti" => "ittam"}
@@ -99,4 +131,4 @@ class BreweriesController < ApplicationController
 
   end
 =end
-end
+
