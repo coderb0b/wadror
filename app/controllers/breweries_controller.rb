@@ -4,6 +4,10 @@ class BreweriesController < ApplicationController
   #before_action :authenticate, only: [:destroy]
   before_action :ensure_that_signed_in, except: [:index, :show]
 
+  def list
+  end
+  
+
   # GET /breweries
   # GET /breweries.json
   def index

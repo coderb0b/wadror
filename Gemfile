@@ -26,6 +26,7 @@ group :test do
 end
 
 gem 'httparty'
+gem 'jquery-turbolinks'
 
 gem 'bootstrap-sass'
 group :development do

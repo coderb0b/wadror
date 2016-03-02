@@ -3,6 +3,12 @@ class BeersController < ApplicationController
   before_action :set_breweries_and_styles_for_template, only: [:new, :edit, :create]
   before_action :ensure_that_signed_in, except: [:index, :show]
 
+  def list
+  end
+
+  def nglist
+  end
+
   # GET /beers
   # GET /beers.json
   def index
@@ -93,5 +99,8 @@ class BeersController < ApplicationController
       #@styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"]
       @styles = Style.all
     end
+
+    
+
 
 end

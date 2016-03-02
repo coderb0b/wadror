@@ -20,6 +20,13 @@ Rails.application.routes.draw do
   #Beer Mapping API
   post 'places', to: 'places#search'
 
+  #selainpuolentoteutus JS
+  get 'beerlist', to:'beers#list'
+
+  #selainpuolentoteutus AngularJS
+  get 'ngbeerlist', to:'beers#nglist'
+
+  get 'brewerylist', to:'breweries#list'
 
 
 ## Aluperäiset ratings määrittelyt
