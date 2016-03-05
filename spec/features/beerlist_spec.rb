@@ -47,4 +47,27 @@ describe "Beerlist page" do
     expect(row3).to have_content "Nikolai"
   end
 
+  it "shows beers in selected order", js:true do
+    visit beerlist_path
+    row1 = find('table').find('tr:nth-child(2)')
+    row2 = find('table').find('tr:nth-child(3)')
+    row3 = find('table').find('tr:nth-child(4)')
+    expect(row1).to have_content "Rauchbier"
+    expect(row2).to have_content "Weizen"
+    expect(row3).to have_content "Lager"
+    
+    click_link('style')
+
+    expect(row1).to have_content "Nikolai"
+    expect(row2).to have_content "Fastenbier"
+    expect(row3).to have_content "Lechte Weisse"
+
+    click_link('brewery')
+
+    expect(row1).to have_content "Lechte Weisse"
+    expect(row2).to have_content "Nikolai"
+    expect(row3).to have_content "Fastenbier"
+
+  end
+
 end
