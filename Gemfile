@@ -30,6 +30,10 @@ gem 'jquery-turbolinks'
 gem 'selenium-webdriver'
 gem 'database_cleaner'
 
+#https://github.com/MiniProfiler/rack-mini-profiler
+#https://samsaffron.com/archive/2012/07/12/miniprofiler-ruby-edition
+gem 'rack-mini-profiler'
+
 gem 'bootstrap-sass'
 group :development do
   gem 'rails_layout'
