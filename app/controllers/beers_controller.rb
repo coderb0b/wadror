@@ -2,12 +2,21 @@ class BeersController < ApplicationController
   before_action :set_beer, only: [:show, :edit, :update, :destroy]
   before_action :set_breweries_and_styles_for_template, only: [:new, :edit, :create]
   before_action :ensure_that_signed_in, except: [:index, :show, :list, :nglist]
+  #before_action :skip_if_cached, only:[:index]
+  
 
   def list
   end
 
   def nglist
   end
+
+  def skip_if_cached #ei toimi
+    @order = params[:order] || 'name'
+    return render :index if fragment_exist?( "beerlist-#{@order}"  )
+  end
+
+
 
   # GET /beers
   # GET /beers.json
@@ -48,6 +57,7 @@ class BeersController < ApplicationController
 
     respond_to do |format|
       if @beer.save
+        expire_fragment('beerlist') #tyhjennetään olutlistauksen cache
         format.html { redirect_to beers_path, notice: 'Beer was successfully created.' }
         format.json { render :show, status: :created, location: @beer }
       else
@@ -64,6 +74,7 @@ class BeersController < ApplicationController
   def update
     respond_to do |format|
       if @beer.update(beer_params)
+        expire_fragment('beerlist') #tyhjennetään olutlistauksen cache
         format.html { redirect_to @beer, notice: 'Beer was successfully updated.' }
         format.json { render :show, status: :ok, location: @beer }
       else
@@ -76,6 +87,7 @@ class BeersController < ApplicationController
   # DELETE /beers/1
   # DELETE /beers/1.json
   def destroy
+    expire_fragment('beerlist') #tyhjennetään olutlistauksen cache
     @beer.destroy
     respond_to do |format|
       format.html { redirect_to beers_url, notice: 'Beer was successfully destroyed.' }
