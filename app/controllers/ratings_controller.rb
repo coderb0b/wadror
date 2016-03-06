@@ -1,13 +1,21 @@
 class RatingsController < ApplicationController
   def index
-  	@ratings = Rating.all
-    @recent_ratings = Rating.recent
-    @top_breweries = Brewery.top 3
-    @top_beers = Beer.top 3
-    @top_raters = User.top 3
-    @top_styles = Style.top 3
-  	#oletusarvo: renderöidään saman niminen näkymä(index). 
-  end
+  	#@ratings = Rating.all
+    #@recent_ratings = Rating.recent
+    #@top_breweries = Brewery.top 3
+    #@top_beers = Beer.top 3    
+    #@top_raters = User.top 3
+    #@top_styles = Style.top 3
+
+    #cache optimointi, alkuperäiset kommenteissa    
+    @top_beers = Rails.cache.fetch("beer top 3", expires_in: 10.minutes) { Beer.top(3) }
+    @top_raters = Rails.cache.fetch("user top 3", expires_in: 10.minutes) { User.top(3) }
+    @top_styles = Rails.cache.fetch("style top 3", expires_in: 10.minutes) { Style.top(3) }
+    @top_breweries = Rails.cache.fetch("brewery top 3", expires_in: 10.minutes) { Brewery.top(3) }
+    @recent_ratings = Rails.cache.fetch("recent ratings", expires_in: 10.minutes) { Rating.recent }
+    @ratings = Rails.cache.fetch("ratings all", expires_in: 10.minutes) { Rating.all }
+  	
+  end  
 
   def new
   	@rating = Rating.new
